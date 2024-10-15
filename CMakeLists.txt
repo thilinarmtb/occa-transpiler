@@ -8,6 +8,7 @@ option(BUILD_DOCUMENTATION "Create the HTML+PDF API documentation (requires Doxy
 # Add custom modules path
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 list(APPEND CMAKE_PREFIX_PATH "$ENV{CLANG_INSTALLED_PATH}")
+message(STATUS "TR: ${CMAKE_PREFIX_PATH}")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,10 +36,10 @@ include(cmake/GitSubmodules.cmake)
 # This is due to the fact that compatibility layer is required in transpiler code to support newer versions
 # This compatibility layer is topic for future releases
 if (NOT OCCA_LOCAL_CLANG_PATH)
-    find_package(Clang 17 REQUIRED)
+  find_package(Clang 17 REQUIRED)
 else()
-    find_package(Clang 17 PATHS ${OCCA_LOCAL_CLANG_PATH} NO_DEFAULT_PATH)
-    find_package(LLVM 17 PATHS ${OCCA_LOCAL_CLANG_PATH} NO_DEFAULT_PATH)
+  find_package(Clang 17 PATHS ${OCCA_LOCAL_CLANG_PATH} NO_DEFAULT_PATH)
+  find_package(LLVM 17 PATHS ${OCCA_LOCAL_CLANG_PATH} NO_DEFAULT_PATH)
 endif()
 
 set(LLVM_ENABLE_RTTI ON)
